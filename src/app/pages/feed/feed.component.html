@@ -4,7 +4,7 @@
     </div>
 
     <div class="toolbar">
-        <button (click)="newPost()">
+        <button (click)="newPost()" [hideIfUnauthorized]="role.author">
             New Post
         </button>
         <button (click)="goToProfile()">
@@ -22,10 +22,13 @@
             </p>
         </div>
         <div class="buttons">
-            <button class="btn">
+            <!-- <button class="btn">
                 Favorite
-            </button>
+            </button> -->
             <!-- Admin only -->
+            <button class="btn" [hideIfUnauthorized]="role.admin">
+                Delete
+            </button>
         </div>
     </div>
 </div>

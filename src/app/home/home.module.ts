@@ -6,20 +6,25 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { SettingsComponent } from '../pages/settings/settings.component';
 import { EditPostComponent } from '../pages/edit-post/edit-post.component';
+import { HideIfUnauthorized } from '../directives/hideUnauthorized.directive';
+import { disabledIfUnauthorized } from '../directives/unauthorized.directive';
 
 @NgModule({
     imports: [
         FormsModule,
         ReactiveFormsModule,
         HomeRoutingModule,
-        CommonModule
+        CommonModule,
     ],
     declarations: [
         FeedComponent,
         ProfileComponent,
         SettingsComponent,
-        EditPostComponent
-    ]
+        EditPostComponent,
+        HideIfUnauthorized,
+        disabledIfUnauthorized
+    ],
+ 
 })
 
 export class HomeModule { }

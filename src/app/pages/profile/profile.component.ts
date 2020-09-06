@@ -15,6 +15,12 @@ export class ProfileComponent implements OnInit {
   yourPosts
   favoritePosts
   isOnYourPosts: Boolean = true
+  // Figure out a way too scale this better
+  role = {
+    user: "USER",
+    author: "AUTHOR",
+    admin: "ADMIN"
+  }
 
   constructor(
     private sharedService: SharedService,
@@ -26,7 +32,7 @@ export class ProfileComponent implements OnInit {
   async ngOnInit() {
     this.user = this.sharedService.getUser()
     console.log(this.user)
-    if(this.user.admin) {
+    if(this.user.role = 'Admin') {
       this.yourPosts = await this.postService.getPostsByUser(this.user._id) 
     }
   }
@@ -42,6 +48,12 @@ export class ProfileComponent implements OnInit {
   editPost(id) {
     console.log(id)
     this.router.navigate(['home/edit-post'], { queryParams: {id: id}})
+  }
+
+  deleteAll() {
+    this.postService.deleteAll(this.user._id).then(() => {
+      this.router.navigate(['home/feed'])
+    })
   }
 
 }

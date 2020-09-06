@@ -1,0 +1,1 @@
+export type AuthGroup = 'USER' | 'AUTHOR' | 'ADMIN';

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Login } from 'src/app/interfaces/login';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,8 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value)
       .then((resp: Login) => {
         if(resp.user) {
+          this.sharedService.setToken(resp.user.token)
+          this.sharedService.setUser(resp.user)
           this.router.navigate(["/home/feed"])
         } else {
           this.errorMessage(resp.msg)

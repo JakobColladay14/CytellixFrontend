@@ -1,38 +1,42 @@
 import { Injectable } from "@angular/core";
 import { User } from '../interfaces/user';
+import { RoleAuthorizationService } from './role.authorization.service';
 
 
 @Injectable()
 export class SharedService {
 
-setToken(token: string): void {
-    localStorage.setItem('token', token);
-}
 
-getToken(): string {
-    return localStorage.getItem('token') || null
-}
+    setToken(token: string): void {
+        console.log(token)
+        localStorage.setItem('token', token);
+    }
 
-removeToken(): void {
-    localStorage.removeItem('token')
-}
+    getToken(): string {
+        return localStorage.getItem('token') || null
+    }
 
-setUser(user: User): void {
-    localStorage.removeItem('user')
-    localStorage.setItem('user', JSON.stringify(user))
-}
+    removeToken(): void {
+        localStorage.removeItem('token')
+    }
 
-getUser(): User {
-    const user = localStorage.getItem('user')
+    setUser(user: User): void {
+        localStorage.removeItem('user')
+        localStorage.setItem('user', JSON.stringify(user))
+    }
 
-    if(user) 
-        return JSON.parse(user)
-    else 
-        return null
-}
+    getUser(): User {
+        const user = localStorage.getItem('user')
 
-removeUser(): void {
-    localStorage.removeItem('user')
-}
+        if(user) 
+            return JSON.parse(user)
+        else 
+            return null
+    }
+
+    removeUser(): void {
+        localStorage.removeItem('user')
+    }
+
 
 }

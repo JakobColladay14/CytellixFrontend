@@ -15,6 +15,7 @@ export class EditPostComponent implements OnInit {
   postForm: FormGroup
   post
   user
+  isNew: Boolean
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class EditPostComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.postId = params['id']
+      this.postId == '0' ? this.isNew = true : this.isNew = false
       this.postService.getPostById(this.postId).then((post) => {
         this.post = post ? post : {title: '', author: '', bodyText: ''}
 
@@ -46,7 +48,7 @@ export class EditPostComponent implements OnInit {
   }
 
   saveDraft() {
-    if(this.postId = 0) {
+    if(this.postId == '0') {
       this.postService.newPost(this.postForm.value, this.user._id).then(() => {
         this._location.back()
       })
@@ -58,6 +60,12 @@ export class EditPostComponent implements OnInit {
         this._location.back()
       })
     }
+  }
+
+  deletePost() {
+    this.postService.deletePost(this.post._id).then(() => {
+      this._location.back()
+    })
   }
 
 }

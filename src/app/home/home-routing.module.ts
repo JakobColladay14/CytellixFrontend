@@ -5,11 +5,14 @@ import { ProfileComponent } from '../pages/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { SettingsComponent } from '../pages/settings/settings.component';
 import { EditPostComponent } from '../pages/edit-post/edit-post.component';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
+        canActivate: [AuthGuardService],
+        data: { auth: "USER"},
         children: [
             {
                 path: 'feed',
@@ -25,8 +28,11 @@ const routes: Routes = [
             },
             {
                 path: 'edit-post',
+                canActivate: [AuthGuardService],
+                data: { auth: 'AUTHOR' },
                 component: EditPostComponent
             }
+           
         ]
     }
 ]

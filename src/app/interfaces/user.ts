@@ -3,7 +3,7 @@ export interface User {
     name: string;
     email: string;
     salt: string;
-    admin: boolean;
+    role: string;
     postGroupId: number;
     token: string;
     createdAt: string;

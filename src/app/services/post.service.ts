@@ -5,22 +5,23 @@ import { Post } from '../interfaces/post';
 
 @Injectable()
 export class PostService {
-    
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json', 
+            'Accept': '*/*',
+            'Authorization': 'Bearer ' + this.sharedService.getToken()
+        })       
+    } 
+
+
     constructor(
         private http: HttpClient,
         private sharedService: SharedService
     ) { }
     
     newPost(post, userId) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json', 
-                'Accept': '*/*'
-            })
-        }
-
         return this.http
-            .post(`/api/post/newPost?userId=${userId}`, post, httpOptions)
+            .post(`/api/post/newPost/${userId}`, post, this.httpOptions)
             .toPromise()
             .then((post) => {
                 return Promise.resolve(post)
@@ -30,15 +31,8 @@ export class PostService {
     }
 
     updatePost(post) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json', 
-                'Accept': '*/*'
-            })
-        }
-
         return this.http
-            .put('/api/post/updatePost', post, httpOptions)
+            .put('/api/post/updatePost', post, this.httpOptions)
             .toPromise()
             .then((post) => {
                 return Promise.resolve(post)
@@ -48,15 +42,8 @@ export class PostService {
     }
 
     getAllPosts() {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json',
-                'Accept': "*/*" 
-            })
-        }
-
         return this.http
-            .get('/api/post/getAllposts', httpOptions)
+            .get('/api/post/getAllposts', this.httpOptions)
             .toPromise()
             .then((resp) => {
                 return Promise.resolve(resp)
@@ -66,15 +53,9 @@ export class PostService {
     }
 
     getPostsByUser(userId) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json',
-                'Accept': "*/*" 
-            })
-        }
-
+        console.log(this.httpOptions)
         return this.http
-            .get(`/api/post/getPostsByUser?userId=${userId}`, httpOptions)
+            .get(`/api/post/getPostsByUser/${userId}`, this.httpOptions)
             .toPromise()
             .then((resp) => {
                 console.log(resp)
@@ -85,20 +66,35 @@ export class PostService {
     }
 
     getPostById(postId) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json',
-                'Accept': "*/*" 
-            })
-        }
-
         return this.http
-            .get(`/api/post/getPostById?postId=${postId}`, httpOptions)
+            .get(`/api/post/getPostById/${postId}`, this.httpOptions)
             .toPromise()
             .then((post: Post) => {
                 return Promise.resolve(post)
             }).catch((err: HttpErrorResponse) => {
                 Promise.reject(err.error)
+            })
+    }
+
+    deleteAll(id) {
+        return this.http
+            .delete(`/api/post/deleteByUser/${id}`, this.httpOptions)
+            .toPromise()
+            .then((resp) => {
+                Promise.resolve(resp)
+            }).catch((err: HttpErrorResponse) => {
+                Promise.reject(err)
+            })
+    }
+
+    deletePost(id) {
+        return this.http
+            .delete(`/api/post/deletePost/${id}`, this.httpOptions)
+            .toPromise()
+            .then((resp) => {
+                Promise.resolve(resp)
+            }).catch((err: HttpErrorResponse) => {
+                Promise.reject(err)
             })
     }
 

@@ -5,6 +5,7 @@ import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { RoleAuthorizationService } from 'src/app/services/role.authorization.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +20,8 @@ export class SettingsComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private _location: Location
+    private _location: Location,
+    private roleAuthService: RoleAuthorizationService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class SettingsComponent implements OnInit {
     this.settingsForm = this.fb.group({
       name: [this.user.name, Validators.compose([Validators.required])],
       email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
-      admin: [this.user.admin, Validators.required]
+      role: [this.user.role, Validators.required]
     })
   }
 
@@ -45,6 +47,17 @@ export class SettingsComponent implements OnInit {
     if(isDeleted) {
       this.router.navigate(['auth/login'])
     }
+  }
+  
+  back() {
+    this._location.back()
+  }
+
+  logout() {
+    this.sharedService.removeUser()
+    this.sharedService.removeToken()
+    this.roleAuthService.resetPermissions()
+    this.router.navigate(['auth/login'])
   }
 
 }

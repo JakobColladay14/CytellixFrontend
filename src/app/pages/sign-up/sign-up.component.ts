@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
     this.signUpForm = this.fb.group({
       name: ['', Validators.compose([Validators.required])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      admin: [true, Validators.required],
+      role: ['', Validators.required],
       // Need a password Validation
       password: ['', Validators.compose([Validators.required])],
       c_password: ['', Validators.compose([Validators.required])]
@@ -38,10 +38,13 @@ export class SignUpComponent implements OnInit {
   }
 
   async signUp() {
-    let newUser = await this.authService.signUp(this.signUpForm.value)
+    console.log(this.signUpForm.value)
 
+    let newUser = await this.authService.signUp(this.signUpForm.value)
+    
     if(newUser) {
       //Set Token 
+      this.sharedService.setToken(newUser.token)
       this.sharedService.setUser(newUser)
       this.router.navigate(['home/feed'])
     } else {

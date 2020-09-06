@@ -16,16 +16,28 @@ import { PostService } from './services/post.service';
 import { UserService } from './services/user.service';
 import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { RoleAuthorizationService } from './services/role.authorization.service';
+import { HideIfUnauthorized } from './directives/hideUnauthorized.directive';
+import { disabledIfUnauthorized } from './directives/unauthorized.directive';
+import { RedirectComponent } from './pages/redirect/redirect.component';
 
 
 
 @NgModule({
+  exports: [
+    // HideIfUnauthorized,
+    // disabledIfUnauthorized
+  ],
   declarations: [
     AppComponent,
     AuthComponent,
     HomeComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    RedirectComponent,
+    // HideIfUnauthorized,
+    // disabledIfUnauthorized
   ],
   imports: [
     BrowserModule,
@@ -41,7 +53,9 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     SharedService,
     AuthService,
     PostService,
-    UserService
+    UserService,
+    AuthGuardService,
+    RoleAuthorizationService
   ],
   bootstrap: [AppComponent]
 })

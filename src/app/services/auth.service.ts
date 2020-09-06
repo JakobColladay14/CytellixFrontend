@@ -8,22 +8,21 @@ import { Login } from '../interfaces/login';
 
 @Injectable()
 export class AuthService {
-
     constructor(
         private http: HttpClient,
         private sharedService: SharedService
     ) {}
 
-    signIn(email: string, password: string) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json', 
-                'Accept': '*/*'
-            })
-        }
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json', 
+            'Accept': '*/*',
+        })       
+    } 
 
+    signIn(email: string, password: string) {
         return this.http
-            .post(`/api/auth/signin`, {email, password}, httpOptions)
+            .post(`/api/auth/signin`, {email, password}, this.httpOptions)
             .toPromise()
             .then((resp: Login) => {
 
@@ -41,15 +40,8 @@ export class AuthService {
     }
 
     signUp(user: User) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json',
-                'Accept': '*/*'
-            })
-        }
-
         return this.http
-            .post(`/api/auth/signup`, user, httpOptions)
+            .post(`/api/auth/signup`, user, this.httpOptions)
             .toPromise()
             .then((user: User) => {
                 // this.sharedService.setToken(user.token)
@@ -60,4 +52,18 @@ export class AuthService {
                 Promise.reject(err.error)
             })
     }
+
+    getPermissions(userId) {
+        return this.http
+            .get(`/api/auth/permissions/${userId}`, this.httpOptions)
+            .toPromise()
+            .then((resp) => {
+                return Promise.resolve(resp)
+            }).catch((err: HttpErrorResponse) => {
+                return Promise.reject(err.error)
+            })
+
+
+    }
+    
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
-import { Post } from 'src/app/interfaces/post';
 import { PostService } from 'src/app/services/post.service';
+import { AuthGroup } from 'src/app/interfaces/auth';
 
 @Component({
   selector: 'app-feed',
@@ -12,16 +12,22 @@ import { PostService } from 'src/app/services/post.service';
 export class FeedComponent implements OnInit {
   user
   posts
+   // Figure out a way too scale this better
+  role = {
+    author: "AUTHOR",
+    admin: "ADMIN",
+    user: "USER"
+  }
+
 
   constructor(
     private router: Router,
     private sharedService: SharedService,
-    private postService: PostService
+    private postService: PostService,
   ) { }
 
   async ngOnInit() {
     this.posts = await this.postService.getAllPosts()
-    console.log(this.posts)
   }
 
 
@@ -30,7 +36,6 @@ export class FeedComponent implements OnInit {
   }
 
   newPost() {
-    console.log('yoyo')
     this.router.navigate(['home/edit-post'], { queryParams: {id: 0} })
   }
 

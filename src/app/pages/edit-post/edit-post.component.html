@@ -1,6 +1,6 @@
 <div class="main">
     <div class="title">
-        <h1 *ngIf="postId > 0; else newPost">Edit Post</h1>
+        <h1 *ngIf="!isNew; else newPost">Edit Post</h1>
         <ng-template #newPost>
             <h1>New Post</h1>
         </ng-template>
@@ -33,6 +33,9 @@
             <div class="buttons">
                 <button class="btn" (click)="saveDraft()">
                     Save
+                </button>
+                <button class="btn" *ngIf="!isNew" (click)="deletePost()">
+                    Delete
                 </button>
         
             </div>

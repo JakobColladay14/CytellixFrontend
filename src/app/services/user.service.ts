@@ -6,20 +6,22 @@ import { User } from '../interfaces/user';
 @Injectable()
 export class UserService {
 
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json', 
+            'Accept': '*/*',
+            'Authorization': 'Bearer ' + this.sharedService.getToken()
+        })       
+    } 
+
     constructor(
         private http: HttpClient,
         private sharedService: SharedService
     ) {}
 
     saveSettings(user, userId) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json',
-                'Accept': "*/*" 
-            })
-        }
         return this.http
-            .put(`/api/user/updateUser?userId=${userId}`, user, httpOptions)
+            .put(`/api/user/updateUser/${userId}`, user, this.httpOptions)
             .toPromise()
             .then((user: User) => {
                 console.log(user)
@@ -31,17 +33,9 @@ export class UserService {
             })
     }
 
-    // Needs to be tested
-    deleteAcct(id) {
-        const httpOptions = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json',
-                'Accept': "*/*" 
-            })
-        }
-
+    deleteAcct(userId) {
         return this.http
-            .delete(`/api/user/removeUser?userId=${id}`, httpOptions)
+            .delete(`/api/user/removeUser/${userId}`, this.httpOptions)
             .toPromise()
             .then((resp) => {
                 this.sharedService.removeUser()

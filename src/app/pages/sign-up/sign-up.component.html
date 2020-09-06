@@ -14,8 +14,13 @@
                     <input type="text" class="input" formControlName="email">
                 </div>
                 <div class="input-ctr">
-                    <p class="text">Admin</p>
-                    <input type="checkbox" formControlName="admin">
+                    <p class="text">Role</p>
+                    <select class="selectInput" formControlName="role">
+                        <option value="USER">User</option>
+                        <option value="AUTHOR">Author</option>
+                        <option value="ADMIN">Admin</option>
+                        <!-- Admin is only an option for the sake of the challenge, normally it wouldn't be an option -->
+                    </select>
                 </div>
                 <div class="input-ctr">
                     <p class="text">Password</p>

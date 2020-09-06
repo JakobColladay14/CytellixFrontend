@@ -6,20 +6,20 @@
         <button (click)="back()">
             Back
         </button>
-        <button class="btn" (click)="isOnYourPosts = !isOnYourPosts">
-            <!-- Only Admin get this btn -->
+        <button class="btn" (click)="isOnYourPosts = !isOnYourPosts" [hideIfUnauthorized]="role.author">
+            <!-- Only Author get this btn -->
             Favorites / Your Posts
         </button>
-        <button class="btn" (click)="goToSettings()">
+        <button class="btn" (click)="goToSettings()" >
             Settings
         </button>
-        <button class="btn">
+        <button class="btn" (click)="deleteAll()" [hideIfUnauthorized]="role.author">
             Delete All
         </button>
     </div>
     <!-- Your posts -->
     <div class="container" *ngFor="let post of yourPosts">
-        <div *ngIf="user.admin && isOnYourPosts">
+        <div *ngIf="user.role !== 'User' && isOnYourPosts">
             <div class="title">
                 {{post.title}} <p>{{post.author}}</p>
             </div>
@@ -29,7 +29,6 @@
                 </p>
             </div>
             <div class="buttons">
-                <!-- Admin only -->
                 <button class="btn" (click)="editPost(post._id)" >
                     Edit
                 </button>
@@ -37,14 +36,12 @@
         </div>
     </div>
     <!-- Favorites -->
-    <div *ngIf="!user.admin">
+    <!-- <div>
         <div class="container">
             <div class="title">
-                <!-- {{post.title}} <p>{{post.author}}</p> -->
             </div>
             <div class="body">
                 <p class="text-content">
-                    <!-- {{post.bodyText}} -->
                 </p>
             </div>
             <div class="buttons">
@@ -54,5 +51,5 @@
                
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
