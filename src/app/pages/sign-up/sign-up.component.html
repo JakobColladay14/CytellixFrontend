@@ -1,0 +1,42 @@
+<div class="main">
+    <div class="container">
+        <div class="title">
+            <h2>Sign Up here</h2>
+        </div>
+        <div class="body">
+            <form [formGroup]="signUpForm">
+                <div class="input-ctr">
+                    <p class="text">Name:</p>
+                    <input type="text" class="input" formControlName="name">
+                </div>
+                <div class="input-ctr">
+                    <p class="text">Email:</p>
+                    <input type="text" class="input" formControlName="email">
+                </div>
+                <div class="input-ctr">
+                    <p class="text">Admin</p>
+                    <input type="checkbox" formControlName="admin">
+                </div>
+                <div class="input-ctr">
+                    <p class="text">Password</p>
+                    <input type="text" class="input" formControlName="password">
+                </div>
+                <div class="input-ctr">
+                    <p class="text">Re-Type Password</p>
+                    <input type="text" class="input" formControlName="c_password">
+                </div>
+            </form>
+        </div>
+
+        <div class="buttons">
+            <button class="btn" (click)="back()">
+                Back
+            </button>
+            <button class="btn" (click)="signUp()">
+                Sign Up
+            </button>
+        </div>
+
+
+    </div>
+</div>

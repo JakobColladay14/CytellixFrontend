@@ -1,0 +1,27 @@
+<div class="main">
+    <div class="container">
+        <div class="title">
+            <h2>Login Here</h2>
+        </div>
+        <div class="body">
+            <form id="loginForm" [formGroup]="loginForm">
+                <div class="input-ctr">
+                    <p class="text">Email:</p> 
+                    <input class="input" formControlName="email" >
+                </div>
+                <div class="input-ctr">
+                    <p class="text">Password:</p>
+                    <input class="input" formControlName="password">
+                </div>
+            </form>
+        </div>
+        <div class="buttons">
+            <button (click)="login()" class="btn">
+                Login
+            </button>
+            <button (click)="signUpClicked()" class="btn sign-up">
+                Sign up
+            </button>
+        </div>
+    </div>
+</div>

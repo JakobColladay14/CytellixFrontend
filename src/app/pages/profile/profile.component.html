@@ -1,0 +1,58 @@
+<div class="main" *ngIf="user">
+    <div class="title">
+        <h1>Profile</h1>
+    </div>
+    <div class="toolbar">
+        <button (click)="back()">
+            Back
+        </button>
+        <button class="btn" (click)="isOnYourPosts = !isOnYourPosts">
+            <!-- Only Admin get this btn -->
+            Favorites / Your Posts
+        </button>
+        <button class="btn" (click)="goToSettings()">
+            Settings
+        </button>
+        <button class="btn">
+            Delete All
+        </button>
+    </div>
+    <!-- Your posts -->
+    <div class="container" *ngFor="let post of yourPosts">
+        <div *ngIf="user.admin && isOnYourPosts">
+            <div class="title">
+                {{post.title}} <p>{{post.author}}</p>
+            </div>
+            <div class="body">
+                <p class="text-content">
+                    {{post.bodyText}}
+                </p>
+            </div>
+            <div class="buttons">
+                <!-- Admin only -->
+                <button class="btn" (click)="editPost(post._id)" >
+                    Edit
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Favorites -->
+    <div *ngIf="!user.admin">
+        <div class="container">
+            <div class="title">
+                <!-- {{post.title}} <p>{{post.author}}</p> -->
+            </div>
+            <div class="body">
+                <p class="text-content">
+                    <!-- {{post.bodyText}} -->
+                </p>
+            </div>
+            <div class="buttons">
+                <button class="btn">
+                    Remove From Favorites
+                </button>
+               
+            </div>
+        </div>
+    </div>
+</div>

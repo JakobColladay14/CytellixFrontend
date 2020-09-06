@@ -1,0 +1,41 @@
+<div class="main">
+    <div class="title">
+        <h1 *ngIf="postId > 0; else newPost">Edit Post</h1>
+        <ng-template #newPost>
+            <h1>New Post</h1>
+        </ng-template>
+    </div>
+
+    <div class="toolbar">
+        <button (click)="back()">
+            Back
+        </button>
+    
+    </div>
+    <div class="container" *ngIf="postForm">
+        <form [formGroup]="postForm">
+            <div>
+                <div class="input-ctr">
+                    <p>Title: </p>
+                    <input type="text" class="input" formControlName="title"  />
+                </div>
+                <div class="input-ctr">
+                    <p>Author:</p>
+                    <input type="text" class="input" formControlName="author" />
+                </div>
+            </div>
+            <div class="body">
+                <p>Body:</p>
+                <textarea class="inputArea" formControlName="bodyText">
+
+                </textarea>
+            </div>
+            <div class="buttons">
+                <button class="btn" (click)="saveDraft()">
+                    Save
+                </button>
+        
+            </div>
+        </form>
+    </div>
+</div>
