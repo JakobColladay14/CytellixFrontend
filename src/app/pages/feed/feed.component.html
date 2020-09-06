@@ -26,7 +26,7 @@
                 Favorite
             </button> -->
             <!-- Admin only -->
-            <button class="btn" [hideIfUnauthorized]="role.admin">
+            <button class="btn" [hideIfUnauthorized]="role.admin" (click)="deletePost(post._id)">
                 Delete
             </button>
         </div>

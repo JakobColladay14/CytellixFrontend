@@ -14,7 +14,6 @@ export class HideIfUnauthorized implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log(this.permission)
         if (!this.authService.hasPermission(this.permission)) {
             this.el.nativeElement.style.display = 'none'
         }

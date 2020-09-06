@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Login } from 'src/app/interfaces/login';
 import { SharedService } from 'src/app/services/shared.service';
+import { PostService } from 'src/app/services/post.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
   ) { }
 
   ngOnInit(): void {
@@ -51,5 +52,7 @@ export class LoginComponent implements OnInit {
   errorMessage(msg) {
 
   }
+
+  
 
 }

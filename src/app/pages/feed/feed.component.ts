@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
 import { PostService } from 'src/app/services/post.service';
-import { AuthGroup } from 'src/app/interfaces/auth';
 
 @Component({
   selector: 'app-feed',
@@ -37,6 +36,11 @@ export class FeedComponent implements OnInit {
 
   newPost() {
     this.router.navigate(['home/edit-post'], { queryParams: {id: 0} })
+  }
+
+  deletePost(id) {
+    this.postService.deletePost(id)
+    location.reload()
   }
 
 }

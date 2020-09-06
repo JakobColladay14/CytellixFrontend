@@ -16,8 +16,7 @@ export class AuthGuardService implements CanActivate {
         if(this.hasRequiredPermission(route.data['auth'])) {
             return true
         } else {
-            // this.router.navigate(['/not-authorized']);
-            return false
+            return false 
         }
     }
 
