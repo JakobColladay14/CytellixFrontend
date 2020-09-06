@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
   }
 
   errorMessage(msg) {
-    console.log(msg)
     window.alert(msg)
   }
 

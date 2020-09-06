@@ -38,8 +38,6 @@ export class SignUpComponent implements OnInit {
   }
 
   async signUp() {
-    console.log(this.signUpForm.value)
-
     let newUser = await this.authService.signUp(this.signUpForm.value)
     
     if(newUser) {

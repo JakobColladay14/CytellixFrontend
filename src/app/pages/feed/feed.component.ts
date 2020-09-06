@@ -34,10 +34,7 @@ export class FeedComponent implements OnInit {
     this.router.navigate(['home/profile'])
   }
 
-  newPost() {
-    this.router.navigate(['home/edit-post'], { queryParams: {id: 0} })
-  }
-
+  
   deletePost(id) {
     this.postService.deletePost(id)
     location.reload()

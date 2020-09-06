@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.user = this.sharedService.getUser()
-    console.log(this.user)
     if(this.user.role = 'Admin') {
       this.yourPosts = await this.postService.getPostsByUser(this.user._id) 
     }
@@ -46,7 +45,6 @@ export class ProfileComponent implements OnInit {
   }
 
   editPost(id) {
-    console.log(id)
     this.router.navigate(['home/edit-post'], { queryParams: {id: id}})
   }
 

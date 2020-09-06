@@ -24,7 +24,6 @@ export class UserService {
             .put(`/api/user/updateUser/${userId}`, user, this.httpOptions)
             .toPromise()
             .then((user: User) => {
-                console.log(user)
                 this.sharedService.setUser(user)
                 
                 return Promise.resolve("Success")

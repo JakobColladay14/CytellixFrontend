@@ -53,12 +53,10 @@ export class PostService {
     }
 
     getPostsByUser(userId) {
-        console.log(this.httpOptions)
         return this.http
             .get(`/api/post/getPostsByUser/${userId}`, this.httpOptions)
             .toPromise()
             .then((resp) => {
-                console.log(resp)
                 return Promise.resolve(resp)
             }).catch((err: HttpErrorResponse) => {
                 Promise.reject(err.error)

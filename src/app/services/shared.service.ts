@@ -8,7 +8,6 @@ export class SharedService {
 
 
     setToken(token: string): void {
-        console.log(token)
         localStorage.setItem('token', token);
     }
 
