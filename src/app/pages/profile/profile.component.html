@@ -6,6 +6,9 @@
         <button (click)="back()">
             Back
         </button>
+        <button (click)="newPost()" [hideIfUnauthorized]="role.author">
+            New Post
+        </button>
         <button class="btn" (click)="isOnYourPosts = !isOnYourPosts" [hideIfUnauthorized]="role.author">
             <!-- Only Author get this btn -->
             Favorites / Your Posts

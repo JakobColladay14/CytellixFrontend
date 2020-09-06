@@ -50,6 +50,10 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['home/edit-post'], { queryParams: {id: id}})
   }
 
+  newPost() {
+    this.router.navigate(['home/edit-post'], { queryParams: {id: 0} })
+  }
+
   deleteAll() {
     this.postService.deleteAll(this.user._id).then(() => {
       this.router.navigate(['home/feed'])
