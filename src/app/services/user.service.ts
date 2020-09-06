@@ -39,6 +39,7 @@ export class UserService {
             .toPromise()
             .then((resp) => {
                 this.sharedService.removeUser()
+                this.sharedService.removeToken()
                 return Promise.resolve("Success")
             }).catch((err: HttpErrorResponse) => {
                 Promise.reject(err.error)

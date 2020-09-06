@@ -17,9 +17,9 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     const token = this.sharedService.getToken()
-    if(token) {
-      this.router.navigate(['/home/feed'])
-    }
+    // if(token) {
+    //   this.router.navigate(['/home/feed'])
+    // }
    
   }
 

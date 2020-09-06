@@ -15,6 +15,7 @@ import { RoleAuthorizationService } from 'src/app/services/role.authorization.se
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup
   user: User
+  isSuccessSaved: boolean
   constructor(
     private sharedService: SharedService,
     private fb: FormBuilder,
@@ -34,16 +35,15 @@ export class SettingsComponent implements OnInit {
     })
   }
 
-  async saveSettings() {
-    console.log(this.settingsForm.value)
-    let saveUser = await this.userService.saveSettings(this.settingsForm.value, this.user._id)
-    console.log(saveUser)
-    //Reload Data and display success or error message
+  saveSettings() {
+    this.userService.saveSettings(this.settingsForm.value, this.user._id).then(() => {
+      window.alert('Profile saved successfully')
+    })
   }
 
   async deleteAcct() {
     let isDeleted = await this.userService.deleteAcct(this.user._id)
-
+    
     if(isDeleted) {
       this.router.navigate(['auth/login'])
     }
